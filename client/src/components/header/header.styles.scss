@@ -1,0 +1,23 @@
+@import "../../variables.scss";
+
+.nav-body {
+  background-color: #ffd57e;
+}
+
+.desktop-search {
+  width: 38rem;
+}
+
+.signup {
+  background-color: $color-primary-dark;
+  &:hover {
+    background-color: $color-secondary-dark;
+  }
+}
+
+.login {
+  background-color: $color-primary-light;
+  &:hover {
+    background-color: $color-secondary-light;
+  }
+}

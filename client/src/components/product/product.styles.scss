@@ -1,0 +1,8 @@
+@import "../../variables.scss";
+
+.add-to-cart {
+  background-color: $color-primary;
+  &:hover {
+    background-color: $color-primary-light;
+  }
+}
