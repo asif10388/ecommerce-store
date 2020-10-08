@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 //MongoDB credentials here(if not provided, you'll get an invalid connection string error!)
-const db = "";
+const db =
+  "mongodb+srv://dbUser:bsnmpc1998@ecommercecluster.50hr1.mongodb.net/ecommerceDB?retryWrites=true&w=majority";
 
 const connectDB = async () => {
   try {

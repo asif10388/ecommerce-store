@@ -1,0 +1,31 @@
+//COLORS
+$color-primary: #0a227c;
+$color-primary-light: #12c7f5;
+$color-primary-dark: #3182ce;
+
+$color-grey-dark: #777;
+$color-grey-dark-2: #999;
+$color-grey-dark-3: #333;
+
+$color-white: #fff;
+
+$color-black: #000;
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$cta-font: "Roboto Slab";
+$default-font: "Jost";
+
+* {
+  font-family: $default-font;
+  transition: all 0.25s ease;
+}
+
+// 1em=16px;
