@@ -6,8 +6,8 @@ const Footer = () => {
     <>
       {" "}
       <footer class="text-gray-700 body-font">
-        <div class="container px-5 py-24 mx-auto">
-          <div class="flex flex-wrap md:text-left text-center order-first">
+        <div class="px-5 py-12 mx-auto footer-main">
+          <div class="flex flex-wrap md:text-left text-center order-first ">
             <div class="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
                 CATEGORIES
@@ -72,17 +72,17 @@ const Footer = () => {
               <div class="flex xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap flex-wrap justify-center md:justify-start">
                 <input
                   class="w-40 sm:w-auto bg-gray-100 rounded xl:mr-4 lg:mr-0 sm:mr-4 mr-2 border border-gray-400 focus:outline-none focus:border-indigo-500 text-base py-2 px-4"
-                  placeholder="Placeholder"
+                  placeholder="Email"
                   type="text"
                 />
-                <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                  Button
+                <button class="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-black bg-indigo-500 border-0 py-2 px-6 focus:outline-none add-to-cart rounded">
+                  Sign Up
                 </button>
               </div>
               <p class="text-black text-sm mt-2 md:text-left text-center">
-                Bitters chicharrones fanny pack
+                Sign up to our newsletter
                 <br class="lg:block hidden" />
-                waistcoat green juice
+                for discouts and offers
               </p>
             </div>
           </div>

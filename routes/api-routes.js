@@ -1,5 +1,5 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const dbModel = require("../models/dbScript");
+import dbModel from "../models/dbScript.js";
 
-module.exports = router;
+export default router;

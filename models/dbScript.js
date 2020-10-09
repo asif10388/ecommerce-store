@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const dbSchema = mongoose.Schema({});
 
-module.exports = mongoose.model("DB", dbSchema);
+export default mongoose.model("DB", dbSchema);

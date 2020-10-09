@@ -1,8 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+//Initialize dotenv
+dotenv.config();
 
 //MongoDB credentials here(if not provided, you'll get an invalid connection string error!)
-const db =
-  "mongodb+srv://dbUser:bsnmpc1998@ecommercecluster.50hr1.mongodb.net/ecommerceDB?retryWrites=true&w=majority";
+const db = process.env.MONGO_URI;
 
 const connectDB = async () => {
   try {
@@ -20,4 +23,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+export default connectDB;

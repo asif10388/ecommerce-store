@@ -1,13 +1,23 @@
-import React from "react";
-
-import products from "../../products";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import Rating from "../../components/rating/rating.component";
 
 import "./SingleProductPage.styles.scss";
 
 const SingpleProductPage = ({ match }) => {
-  const product = products.find((product) => product._id === match.params.id);
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, []);
+
   return (
     <>
       <section class="text-gray-700 body-font overflow-hidden">
@@ -69,7 +79,7 @@ const SingpleProductPage = ({ match }) => {
                       : "text-gray-600"
                   }`}
                 >
-                  {product.countInStock > 0 ? "In Stock" : "Out Stock"}
+                  {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                 </span>
               </div>
               <div class="flex">
@@ -77,7 +87,7 @@ const SingpleProductPage = ({ match }) => {
                   {product.price} ৳
                 </span>
                 <button
-                  class="flex ml-auto text-black bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded add-to-cart"
+                  class="flex ml-auto text-black bg-indigo-500 border-0 py-2 px-6 focus:outline-none rounded add-to-cart"
                   type="button"
                   disabled={product.countInStock === 0}
                 >

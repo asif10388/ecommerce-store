@@ -33,7 +33,7 @@ const Product = ({ product }) => {
             </div>
             <div class="flex flex-col md:flex-row justify-between items-center text-gray-900">
               <p class="font-bold text-xl">{product.price} ৳</p>
-              <button class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart">
+              <button class="px-6 py-2 transition font-bold ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart">
                 Add to cart
               </button>
             </div>
