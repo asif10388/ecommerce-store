@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: "1",
     name: "Gigabyte Radeon RX 5700 XT GAMING OC 8G GDDR6 8GB",
     image: "/images/product1.jpg",
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "2",
     name: "Steelseries Rival 600 Black Gaming Mouse",
     image: "/images/product2.jpg",
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
     name: "MSI GeForce RTX 2060 Super Ventus OC 8GB GDDR6",
     image: "/images/product3.jpg",
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "4",
     name: "Edifier G4 Green USB Over-Ear Wired",
     image: "/images/product4.jpg",
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "5",
     name: "Edifier G4 Red USB Over-Ear Wired",
     image: "/images/product5.jpg",
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: "6",
     name: "Gigabyte X570 Aorus Master DDR4 AM4 Socket AMD",
     image: "/images/product6.jpg",
     description:
