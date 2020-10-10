@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 
 import {
@@ -38,7 +38,7 @@ const CartPage = ({ match, location, history }) => {
       <div className="container px-5 py-24">
         <Row>
           <Col md={8}>
-            <h1 class="text-3xl">Shopping Cart</h1>
+            <h1 className="text-3xl">Shopping Cart</h1>
             {cartItems.length === 0 ? (
               <h1>Your cart is empty.</h1>
             ) : (
@@ -52,10 +52,9 @@ const CartPage = ({ match, location, history }) => {
                       <Col md={3}>{item.name}</Col>
                       <Col md={2}>{item.price}</Col>
                       <Col md={2}>
-                        {" "}
-                        <div class="relative">
+                        <div className="relative">
                           <select
-                            class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10"
+                            className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10"
                             value={item.qty}
                             onChange={(e) =>
                               dispatch(
@@ -72,14 +71,14 @@ const CartPage = ({ match, location, history }) => {
                               </option>
                             ))}
                           </select>
-                          <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                          <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                             <svg
                               fill="none"
                               stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              class="w-4 h-4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              className="w-4 h-4"
                               viewBox="0 0 24 24"
                             >
                               <path d="M6 9l6 6 6-6"></path>
@@ -90,10 +89,10 @@ const CartPage = ({ match, location, history }) => {
                       <Col md={2}>
                         <button
                           type="button"
-                          class="px-6 py-2 transition font-bold ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart"
+                          className="px-6 py-2 transition font-bold ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart"
                           onClick={() => removeFromCartHandler(item.productId)}
                         >
-                          <i class="fas fa-trash"></i>
+                          <i className="fas fa-trash"></i>
                         </button>
                       </Col>
                     </Row>
@@ -110,11 +109,10 @@ const CartPage = ({ match, location, history }) => {
                     Subtotal (
                     {cartItems.reduce((total, item) => total + item.qty, 0)})
                   </h2>
-                  ৳
+                  ৳{" "}
                   {cartItems
                     .reduce((total, item) => total + item.qty * item.price, 0)
                     .toFixed(2)}
-                  )
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button

@@ -1,6 +1,6 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./cart.types";
 import axios from "axios";
-import { setAlert } from "../alert/alert.actions";
+//import { setAlert } from "../alert/alert.actions";
 
 //Add to cart
 export const addToCart = (id, qty) => async (dispatch, getState) => {

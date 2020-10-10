@@ -11,7 +11,7 @@ const Homepage = () => {
 
   const productList = useSelector((state) => state.productList);
 
-  const { loading, products, error } = productList;
+  const { loading, products } = productList;
 
   useEffect(() => {
     dispatch(getProducts());
@@ -20,9 +20,9 @@ const Homepage = () => {
   return (
     <>
       {" "}
-      <section class="text-gray-700 body-font">
-        <div class="container px-5 pt-24 pb-12 mx-auto">
-          <div class="flex flex-wrap">
+      <section className="text-gray-700 body-font">
+        <div className="container px-5 pt-24 pb-12 mx-auto">
+          <div className="flex flex-wrap">
             {loading ? (
               <Spinner />
             ) : (

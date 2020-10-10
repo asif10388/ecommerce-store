@@ -7,7 +7,7 @@ import {
   PRODUCT_DETAILS_FAIL,
 } from "./product.types";
 import axios from "axios";
-import { setAlert } from "../alert/alert.actions";
+//import { setAlert } from "../alert/alert.actions";
 
 //Get All Products
 export const getProducts = () => async (dispatch) => {
