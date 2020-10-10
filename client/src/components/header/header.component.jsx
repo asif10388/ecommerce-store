@@ -66,7 +66,7 @@ const Header = () => {
                 </Link>
                 <Link
                   class="my-1 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
-                  to="/"
+                  to="/cart"
                 >
                   <svg
                     width="24"
