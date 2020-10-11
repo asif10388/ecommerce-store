@@ -1,8 +1,10 @@
 import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 import productRoutes from "./routes/productRoutes/productRoutes.js";
+import userRoutes from "./routes/userRoutes/userRoutes.js";
 
 import { notfound, errorHandler } from "./middlewares/errorMiddleware.js";
 
@@ -13,10 +15,14 @@ dotenv.config();
 const app = express();
 
 //Initialize Middleware
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use(express.json({ extended: false }));
 
 //Define Routes
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 //Use Middlewares
 app.use(notfound);
