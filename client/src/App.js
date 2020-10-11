@@ -13,6 +13,8 @@ import SingleProductPage from "./pages/SingleProductPage/SingleProductPage";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import CartPage from "./pages/CartPage/CartPage";
+import Profile from "./pages/Profile/Profile";
+import UpdateProfile from "./pages/Profile/UpdateProfile";
 import Footer from "./components/footer/footer.component";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Router>
           <Header />
           <Route exact path="/" component={Homepage} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile/update" component={UpdateProfile} />
           <Route path="/product/:id" component={SingleProductPage} />
           <Route path="/cart/:id?" component={CartPage} />
           <Route exact path="/login" component={Login} />

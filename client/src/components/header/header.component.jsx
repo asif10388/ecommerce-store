@@ -1,10 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./header.styles.scss";
 
+import { logout } from "../../redux/reducers/auth/auth.actions";
+
 const Header = () => {
   const [toggle, isToggled] = useState(false);
+  const [toggleDropdownButton, isToggledDropdown] = useState(false);
+
   const toggleButton = () => isToggled(!toggle);
+  const toggleDropdown = () => isToggledDropdown(!toggleDropdownButton);
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const { userInfo } = userLogin;
+
+  const logOutHandler = () => {
+    dispatch(logout());
+  };
 
   return (
     <>
@@ -112,21 +128,53 @@ const Header = () => {
                   </svg>
                 </Link>
               </div>
+              {userInfo ? (
+                <div class="relative md:mt-2">
+                  <button
+                    class="block md:p-2 rounded overflow-hidden focus:outline-none transition-none md:hover:bg-yellow-800 md:hover:text-white"
+                    onClick={toggleDropdown}
+                  >
+                    {userInfo.name} <i class="fas fa-caret-down"></i>
+                  </button>
 
-              <div className="flex items-center py-2 -mx-1 md:mx-0">
-                <Link
-                  className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
-                  to="/login"
-                >
-                  Login
-                </Link>
-                <Link
-                  className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
-                  to="/signup"
-                >
-                  Sign Up
-                </Link>
-              </div>
+                  <div
+                    class={` ${
+                      toggleDropdownButton ? "absolute" : "hidden"
+                    } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
+                  >
+                    <Link
+                      to="/profile"
+                      class="transition-colors w-full duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                    >
+                      Profile
+                    </Link>
+                    <div class="py-2">
+                      <hr></hr>
+                    </div>
+                    <Link
+                      class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                      onClick={logOutHandler}
+                    >
+                      Logout
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center py-2 -mx-1 md:mx-0">
+                  <Link
+                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
+                    to="/signup"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              )}
 
               {/* Search input on mobile screen */}
               <div className="mt-3 md:hidden">

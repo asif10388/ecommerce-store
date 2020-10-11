@@ -1,0 +1,30 @@
+@import "../../variables.scss";
+
+.admin-sidebar a {
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+}
+
+.bg-sidebar {
+  background: $color-primary;
+}
+.cta-btn {
+  color: $color-primary-dark;
+}
+.upgrade-btn {
+  background: $color-secondary-light;
+}
+.upgrade-btn:hover {
+  background: $color-secondary-dark;
+}
+.active-nav-link {
+  background: $color-secondary-dark;
+}
+.nav-item:hover {
+  background: $color-secondary-dark;
+}
+.account-link:hover {
+  background: $color-secondary-dark;
+}
