@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import productRoutes from "./routes/productRoutes/productRoutes.js";
 import userRoutes from "./routes/userRoutes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes/orderRoutes.js";
 
 import { notfound, errorHandler } from "./middlewares/errorMiddleware.js";
 
@@ -23,6 +24,7 @@ app.use(express.json({ extended: false }));
 //Define Routes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 //Use Middlewares
 app.use(notfound);

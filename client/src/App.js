@@ -15,6 +15,9 @@ import SignUp from "./pages/SignUp/SignUp";
 import CartPage from "./pages/CartPage/CartPage";
 import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/Profile/UpdateProfile";
+import Shipping from "./pages/Shipping/Shipping";
+import Payment from "./pages/Payment/Payment";
+import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import Footer from "./components/footer/footer.component";
 
 function App() {
@@ -28,6 +31,9 @@ function App() {
           <Route exact path="/profile/update" component={UpdateProfile} />
           <Route path="/product/:id" component={SingleProductPage} />
           <Route path="/cart/:id?" component={CartPage} />
+          <Route path="/shipping" component={Shipping} />
+          <Route path="/payment" component={Payment} />
+          <Route path="/placeorder" component={PlaceOrder} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <Footer />

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Link } from "react-router-dom";
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 
 import {
   addToCart,
@@ -35,99 +34,86 @@ const CartPage = ({ match, location, history }) => {
 
   return (
     <>
-      <div className="container px-5 py-24">
-        <Row>
-          <Col md={8}>
-            <h1 className="text-3xl">Shopping Cart</h1>
-            {cartItems.length === 0 ? (
-              <h1>Your cart is empty.</h1>
-            ) : (
-              <ListGroup variant="flush">
-                {cartItems.map((item) => (
-                  <ListGroup.Item key={item.productId}>
-                    <Row className="flex items-center">
-                      <Col md={2}>
-                        <Image src={item.image} alt={item.name} fluid rounded />
-                      </Col>
-                      <Col md={3}>{item.name}</Col>
-                      <Col md={2}>{item.price}</Col>
-                      <Col md={2}>
-                        <div className="relative">
-                          <select
-                            className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10"
-                            value={item.qty}
-                            onChange={(e) =>
-                              dispatch(
-                                addToCart(
-                                  item.productId,
-                                  Number(e.target.value)
-                                )
+      <div class="container px-5 py-8 mx-auto flex flex-wrap min-h-screen">
+        <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+          {
+            cartItems.length === 0 ? (<h1 class="text-xl text-gray-900">Your cart is empty</h1>) : (
+              <>{
+                cartItems.map((item) => (
+                  <div key={item.productId} class="py-8 mx-auto flex md:items-center sm:flex-row flex-col">
+                    <a class="flex md:items-center md:justify-start text-gray-900 flex flex-col md:flex-row">
+                      <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4 mb-2 md:mb-0" src={item.image} alt={item.name} />
+                      <span class="md:ml-1 text-md">{item.name}</span>
+                      <span class="md:ml-5 text-md">{item.price} ৳</span>
+                    </a>
+                    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 sm:justify-start">
+                      <div className="relative">
+                        <select
+                          className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-indigo-500 text-base pl-3 pr-10"
+                          value={item.qty}
+                          onChange={(e) =>
+                            dispatch(
+                              addToCart(
+                                item.productId,
+                                Number(e.target.value)
                               )
-                            }
-                          >
-                            {[...Array(item.countInStock).keys()].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </option>
-                            ))}
-                          </select>
-                          <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                            <svg
-                              fill="none"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              className="w-4 h-4"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M6 9l6 6 6-6"></path>
-                            </svg>
-                          </span>
-                        </div>
-                      </Col>
-                      <Col md={2}>
-                        <button
-                          type="button"
-                          className="px-6 py-2 transition font-bold ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart"
-                          onClick={() => removeFromCartHandler(item.productId)}
+                            )
+                          }
                         >
-                          <i className="fas fa-trash"></i>
-                        </button>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            )}
-          </Col>
-          <Col md={4}>
-            <Card>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <h2 className="text-gray-900 text-3xl title-font font-medium mb-1">
-                    Subtotal (
-                    {cartItems.reduce((total, item) => total + item.qty, 0)})
-                  </h2>
-                  ৳{" "}
-                  {cartItems
-                    .reduce((total, item) => total + item.qty * item.price, 0)
-                    .toFixed(2)}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Button
-                    type="button"
-                    class="block"
-                    disabled={cartItems.length === 0}
-                    onClick={checkOutHandler}
-                  >
-                    Proceed To Checkout
-                  </Button>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
+                          {[...Array(item.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </select>
+                        <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                          <svg
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            className="w-4 h-4"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M6 9l6 6 6-6"></path>
+                          </svg>
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        className="px-6 py-2 transition font-bold ease-in duration-200 uppercase rounded-full border-2 border-yellow-900 focus:outline-none add-to-cart ml-2"
+                        onClick={() => removeFromCartHandler(item.productId)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </span>
+                  </div>
+                ))
+              }
+
+              </>
+
+            )
+          }
+        </div>
+        <div class="lg:w-2/6 md:w-1/2 rounded-lg flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+          <div class="bg-gray-200 p-8">
+            <h2 class="text-gray-900 text-3xl font-medium title-font mb-5">
+              Subtotal ({cartItems.reduce((total, item) => total + item.qty, 0)}) Items
+          </h2>
+            <p class="my-2">
+              {cartItems
+                .reduce((total, item) => total + item.qty * item.price, 0)
+                .toFixed(2)} ৳
+          </p>
+
+            <button class="text-white bg-gray-900 border-0 py-2 px-8 focus:outline-none hover:bg-gray-700 rounded text-lg"
+              disabled={cartItems.length === 0}
+              onClick={checkOutHandler}>Proceed To Checkout</button>
+          </div>
+
+        </div>
       </div>
     </>
   );

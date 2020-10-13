@@ -30,12 +30,12 @@ const SingpleProductPage = ({ history, match }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <section className="text-gray-700 body-font overflow-hidden">
+        <section className="text-gray-700 body-font overflow-hidden min-h-screen">
           <div className="container px-5 py-24 mx-auto">
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
               <img
                 alt="ecommerce"
-                className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+                className="lg:w-1/2 w-full lg:h-auto h-full object-cover object-center rounded"
                 src={product.image}
               />
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

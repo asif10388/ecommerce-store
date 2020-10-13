@@ -152,6 +152,15 @@ const Header = () => {
                       <hr></hr>
                     </div>
                     <Link
+                      to="/profile/update"
+                      class=" lg:hidden transition-colors w-full duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                    >
+                      Update Info
+                    </Link>
+                    <div class="py-2 lg:hidden">
+                      <hr></hr>
+                    </div>
+                    <Link
                       class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
                       onClick={logOutHandler}
                     >

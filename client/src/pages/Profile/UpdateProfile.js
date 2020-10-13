@@ -90,7 +90,7 @@ const UpdateProfile = ({ location, history }) => {
         <main class="w-full flex-grow p-6">
           <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
             <p class="text-xl pb-6 flex items-center">
-              <i class="fas fa-list mr-3"></i> Contact Form
+              <i class="fas fa-list mr-3"></i> Update Your Profile
             </p>
             <div class="leading-loose">
               <form

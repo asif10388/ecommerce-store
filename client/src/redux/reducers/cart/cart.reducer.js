@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./cart.types";
+import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_SHIPPING_ADDRESS, SAVE_PAYMENT_METHOD } from "./cart.types";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -30,6 +30,18 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         cartItems: state.cartItems.filter(
           (cartItem) => cartItem.productId !== payload
         ),
+      };
+
+    case SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: payload,
+      };
+
+    case SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: payload,
       };
     default:
       return state;

@@ -20,7 +20,7 @@ const Homepage = () => {
   return (
     <>
       {" "}
-      <section className="text-gray-700 body-font">
+      <section className="text-gray-700 body-font min-h-screen">
         <div className="container px-5 pt-24 pb-12 mx-auto">
           <div className="flex flex-wrap">
             {loading ? (
