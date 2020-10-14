@@ -18,6 +18,7 @@ import UpdateProfile from "./pages/Profile/UpdateProfile";
 import Shipping from "./pages/Shipping/Shipping";
 import Payment from "./pages/Payment/Payment";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+import OrderPage from "./pages/OrderPage/OrderPage";
 import Footer from "./components/footer/footer.component";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/profile/update" component={UpdateProfile} />
           <Route path="/product/:id" component={SingleProductPage} />
+          <Route path="/order/:id" component={OrderPage} />
           <Route path="/cart/:id?" component={CartPage} />
           <Route path="/shipping" component={Shipping} />
           <Route path="/payment" component={Payment} />
