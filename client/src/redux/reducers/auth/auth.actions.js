@@ -10,10 +10,13 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAILED,
+  USER_DETAILS_RESET,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAILED,
 } from "./auth.types";
+
+import { ORDER_LIST_RESET } from '../order/order.types';
 
 import { setAlert } from "../alert/alert.actions";
 
@@ -154,4 +157,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_RESET });
 };
