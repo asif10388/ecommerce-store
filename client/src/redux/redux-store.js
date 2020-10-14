@@ -11,6 +11,9 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateReducer,
+  userListReducer,
+  userDeleteReducer,
+  userUpdateStateReducer
 } from "./reducers/auth/auth.reducer";
 import {
   orderCreateReducer,
@@ -28,10 +31,14 @@ const rootReducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
+  userUpdateState: userUpdateStateReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderList: orderListReducer
+
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

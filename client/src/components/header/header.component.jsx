@@ -8,9 +8,11 @@ import { logout } from "../../redux/reducers/auth/auth.actions";
 const Header = () => {
   const [toggle, isToggled] = useState(false);
   const [toggleDropdownButton, isToggledDropdown] = useState(false);
+  const [toggleAdminDropdownButton, isToggledAdminDropdown] = useState(false);
 
   const toggleButton = () => isToggled(!toggle);
   const toggleDropdown = () => isToggledDropdown(!toggleDropdownButton);
+  const toggleAdminDropdown = () => isToggledAdminDropdown(!toggleAdminDropdownButton);
 
   const dispatch = useDispatch();
 
@@ -78,12 +80,6 @@ const Header = () => {
                 </Link>
                 <Link
                   className="my-1 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
-                  to="/"
-                >
-                  Blog
-                </Link>
-                <Link
-                  className="my-1 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
                   to="/cart"
                 >
                   <svg
@@ -138,9 +134,8 @@ const Header = () => {
                   </button>
 
                   <div
-                    class={` ${
-                      toggleDropdownButton ? "absolute" : "hidden"
-                    } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
+                    class={` ${toggleDropdownButton ? "absolute" : "hidden"
+                      } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
                   >
                     <Link
                       to="/profile"
@@ -169,22 +164,60 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center py-2 -mx-1 md:mx-0">
-                  <Link
-                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
-                    to="/login"
-                  >
-                    Login
+                  <div className="flex items-center py-2 -mx-1 md:mx-0">
+                    <Link
+                      className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
+                      to="/login"
+                    >
+                      Login
                   </Link>
-                  <Link
-                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
-                    to="/signup"
-                  >
-                    Sign Up
+                    <Link
+                      className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
+                      to="/signup"
+                    >
+                      Sign Up
                   </Link>
-                </div>
-              )}
+                  </div>
+                )}
+              {userInfo && userInfo.isAdmin && (
+                <div class="relative md:mt-2">
+                  <button
+                    class="block md:p-2 rounded overflow-hidden focus:outline-none transition-none md:hover:bg-yellow-800 md:hover:text-white"
+                    onClick={toggleAdminDropdown}
+                  >
+                    Admin <i class="fas fa-caret-down"></i>
+                  </button>
 
+                  <div
+                    class={` ${toggleAdminDropdownButton ? "absolute" : "hidden"
+                      } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
+                  >
+                    <Link
+                      to="/admin/userslist"
+                      class="transition-colors w-full duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                    >
+                      Users
+                    </Link>
+                    <div class="py-2">
+                      <hr></hr>
+                    </div>
+                    <Link
+                      to="/admin/productlist"
+                      class=" transition-colors w-full duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                    >
+                      Products
+                    </Link>
+                    <div class="py-2">
+                      <hr></hr>
+                    </div>
+                    <Link
+                      to="/admin/orderlist"
+                      class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white"
+                    >
+                      Orders
+                    </Link>
+                  </div>
+                </div>)}
               {/* Search input on mobile screen */}
               <div className="mt-3 md:hidden">
                 <input

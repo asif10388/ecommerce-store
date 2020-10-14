@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Spinner from "../../components/spinner/spinner.component";
+import SideBar from "../../components/sidebar/sidebar.component"
 
 import {
   getUserDetails,
@@ -38,7 +39,6 @@ const UpdateProfile = ({ location, history }) => {
       history.push("/login");
     } else {
       if (!user.name) {
-        console.log(user.name);
         dispatch(getUserDetails("profile"));
       } else {
         setFormData({ ...formData, name: user.name, email: user.email });
@@ -58,35 +58,7 @@ const UpdateProfile = ({ location, history }) => {
   return (
     <>
       <div className="flex">
-        <aside className="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xs admin-sidebar">
-          <div className="p-6">
-            <Link
-              to="/profile"
-              className="text-black text-3xl font-semibold uppercase hover:text-gray-300"
-            >
-              Dashboard
-            </Link>
-            <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-md hover:shadow-lg hover:bg-gray-300 flex items-center justify-center">
-              <i className="fas fa-plus mr-3"></i> Add Product
-            </button>
-          </div>
-          <nav className="text-black text-base font-semibold pt-3">
-            <Link
-              to="/profile"
-              className="flex items-center text-black opacity-75 hover:opacity-100 py-4 pl-6 nav-item"
-            >
-              <i className="fas fa-tachometer-alt mr-3"></i>
-              Dashboard
-            </Link>
-            <Link
-              to="/profile/update"
-              className="flex items-center text-black opacity-75 hover:opacity-100 py-4 pl-6 nav-item"
-            >
-              <i className="fas fa-align-left mr-3"></i>
-              Update Your Info
-            </Link>
-          </nav>
-        </aside>
+        <SideBar />
         <main class="w-full flex-grow p-6">
           <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
             <p class="text-xl pb-6 flex items-center">
