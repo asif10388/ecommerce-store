@@ -11,14 +11,19 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAILED,
-
+  ALL_ORDERS_LIST_REQUEST,
+  ALL_ORDERS_LIST_SUCCESS,
+  ALL_ORDERS_LIST_FAILED,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_FAILED,
+  ORDER_DELIVER_RESET,
 } from "./order.types";
 import axios from "axios";
 //import { setAlert } from "../alert/alert.actions";
 
 //Create Order
 export const createOrder = (order) => async (dispatch, getState) => {
-
   try {
     dispatch({ type: ORDER_CREATE_REQUEST });
 
@@ -39,7 +44,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
       type: ORDER_CREATE_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAILED,
@@ -53,7 +57,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
 //Get Order Details
 export const getOrderDetails = (id) => async (dispatch, getState) => {
-
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
@@ -73,7 +76,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAILED,
@@ -86,8 +88,10 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
 };
 
 //Pay Order
-export const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
-
+export const payOrder = (orderId, paymentResult) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({ type: ORDER_PAY_REQUEST });
 
@@ -102,13 +106,16 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
       },
     };
 
-    const { data } = await axios.put(`/api/orders/${orderId}/pay`, paymentResult, config);
+    const { data } = await axios.put(
+      `/api/orders/${orderId}/pay`,
+      paymentResult,
+      config
+    );
 
     dispatch({
       type: ORDER_PAY_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: ORDER_PAY_FAILED,
@@ -120,9 +127,44 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
   }
 };
 
+//Deliver Order
+export const deliverOrder = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_DELIVER_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/deliver`,
+      {},
+      config
+    );
+
+    dispatch({
+      type: ORDER_DELIVER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DELIVER_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 //Get user's orders
 export const getUserOrders = () => async (dispatch, getState) => {
-
   try {
     dispatch({ type: ORDER_LIST_REQUEST });
 
@@ -142,10 +184,41 @@ export const getUserOrders = () => async (dispatch, getState) => {
       type: ORDER_LIST_SUCCESS,
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: ORDER_LIST_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+//Get ALL orders
+export const getAllOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ALL_ORDERS_LIST_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/orders`, config);
+
+    dispatch({
+      type: ALL_ORDERS_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDERS_LIST_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

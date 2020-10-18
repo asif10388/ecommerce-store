@@ -1,34 +1,34 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import "./Profile.styles.scss";
 
-import { getUserOrders } from "../../redux/reducers/order/order.actions";
+import { getAllOrders } from "../../redux/reducers/order/order.actions";
 
 import Spinner from "../../components/spinner/spinner.component";
 import SideBar from "../../components/sidebar/sidebar.component";
 
-const Profile = ({ history }) => {
+const AllOrdersPage = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const orderList = useSelector((state) => state.orderList);
-  const { error: errorOrders, loading: loadingOrders, orders } = orderList;
+  const allOrders = useSelector((state) => state.allOrders);
+  const { loading, error, orders } = allOrders;
 
   useEffect(() => {
-    if (!userInfo) {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(getAllOrders());
+    } else {
       history.push("/login");
     }
-    dispatch(getUserOrders());
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history]);
 
   return (
     <>
       <div className="flex">
         <SideBar />
-        {loadingOrders ? (
+        {loading ? (
           <Spinner />
         ) : (
           <div class="w-full overflow-scroll border-t flex flex-col min-h-screen">
@@ -37,6 +37,9 @@ const Profile = ({ history }) => {
                 <tr>
                   <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Id
+                  </th>
+                  <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name
                   </th>
                   <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Date
@@ -48,7 +51,7 @@ const Profile = ({ history }) => {
                     Paid
                   </th>
                   <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Delivered
+                    Status
                   </th>
                   <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"></th>
                 </tr>
@@ -60,6 +63,13 @@ const Profile = ({ history }) => {
                       <div class="flex items-center">
                         <p class="text-gray-900 whitespace-no-wrap">
                           # {order._id}
+                        </p>
+                      </div>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                      <div class="flex items-center">
+                        <p class="text-gray-900 whitespace-no-wrap">
+                          {order.user && order.user.name}
                         </p>
                       </div>
                     </td>
@@ -79,17 +89,11 @@ const Profile = ({ history }) => {
                       </p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div
-                        class={`${
-                          order.isDelivered
-                            ? "bg-green-200 text-green-900"
-                            : "bg-red-200 text-red-900"
-                        } inline-block px-3 py-1 font-semibold  leading-tight rounded-full`}
-                      >
-                        <p>{order.isDelivered ? "Yes" : `No`}</p>
-                      </div>
+                      <p class="text-gray-900 whitespace-no-wrap">
+                        {order.isDelivered ? "Yes" : `No`}
+                      </p>
                     </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <td class="px-5 flex py-5 border-b border-gray-200 bg-white text-sm">
                       <Link to={`/order/${order._id}`}>
                         <button class="flex mx-auto text-white bg-gray-900 border-0 py-2 px-8 focus:outline-none hover:bg-gray-700 rounded text-lg">
                           Details
@@ -107,4 +111,4 @@ const Profile = ({ history }) => {
   );
 };
 
-export default Profile;
+export default AllOrdersPage;

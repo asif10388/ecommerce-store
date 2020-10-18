@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import "./header.styles.scss";
+
+import SearchBox from "../searchbox/searchbox.component";
 
 import { logout } from "../../redux/reducers/auth/auth.actions";
 
@@ -12,12 +14,12 @@ const Header = () => {
 
   const toggleButton = () => isToggled(!toggle);
   const toggleDropdown = () => isToggledDropdown(!toggleDropdownButton);
-  const toggleAdminDropdown = () => isToggledAdminDropdown(!toggleAdminDropdownButton);
+  const toggleAdminDropdown = () =>
+    isToggledAdminDropdown(!toggleAdminDropdownButton);
 
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-
   const { userInfo } = userLogin;
 
   const logOutHandler = () => {
@@ -26,27 +28,36 @@ const Header = () => {
 
   return (
     <>
-      <nav className="nav-body shadow">
+      <nav className="nav-body shadow w-full">
         <div className="container mx-auto px-6 py-3">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="flex justify-between items-center">
               <div className="flex items-center">
                 <Link
-                  className="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
+                  className=" text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
                   to="/"
                 >
                   Store Name
                 </Link>
 
                 {/* Search input on desktop screen */}
-                <div className="mx-10 hidden md:block">
+                <Route
+                  render={({ history }) => <SearchBox history={history} />}
+                />
+                {/* <div className="ml-10 mr-5 hidden md:block md:flex">
                   <input
                     type="text"
-                    className="w-32 px-4 py-3 leading-tight text-sm text-gray-700 bg-gray-100 rounded-md placeholder-gray-500 border-2 border-yellow-600 focus:outline-none focus:bg-white desktop-search"
+                    className="w-3/4 px-4 py-3 leading-tight text-sm text-gray-700 bg-gray-100 rounded-md placeholder-gray-500 border-2 border-yellow-600 focus:outline-none focus:bg-white desktop-search"
                     placeholder="Search"
                     aria-label="Search"
                   />
-                </div>
+                  <button
+                    class="w-1/4 inline-block md:mx-2 rounded overflow-hidden focus:outline-none transition-none bg-yellow-800 text-white"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </div> */}
               </div>
 
               {/* Mobile menu button */}
@@ -71,15 +82,15 @@ const Header = () => {
             <div
               className={`${toggle ? "block" : "hidden"} md:flex items-center`}
             >
-              <div className="flex flex-col mt-2 md:flex-row md:mt-0 md:mx-1">
+              <div className="flex flex-col mt-2 md:flex-row md:mx-1">
                 <Link
-                  className="my-1 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
+                  className="md:p-2 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
                   to="/"
                 >
                   Home
                 </Link>
                 <Link
-                  className="my-1 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
+                  className="md:p-2 text-lg text-black leading-5 hover:text-yellow-900 md:mx-4 md:my-0"
                   to="/cart"
                 >
                   <svg
@@ -124,8 +135,9 @@ const Header = () => {
                   </svg>
                 </Link>
               </div>
+
               {userInfo ? (
-                <div class="relative md:mt-2">
+                <div class="relative md:mt-2 z-10">
                   <button
                     class="block md:p-2 rounded overflow-hidden focus:outline-none transition-none md:hover:bg-yellow-800 md:hover:text-white"
                     onClick={toggleDropdown}
@@ -134,8 +146,9 @@ const Header = () => {
                   </button>
 
                   <div
-                    class={` ${toggleDropdownButton ? "absolute" : "hidden"
-                      } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
+                    class={` ${
+                      toggleDropdownButton ? "absolute" : "hidden"
+                    } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
                   >
                     <Link
                       to="/profile"
@@ -164,23 +177,24 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                  <div className="flex items-center py-2 -mx-1 md:mx-0">
-                    <Link
-                      className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
-                      to="/login"
-                    >
-                      Login
+                <div className="flex items-center py-2 -mx-1 md:mx-0">
+                  <Link
+                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-bold text-black leading-5 md:mx-2 md:w-auto login"
+                    to="/login"
+                  >
+                    Login
                   </Link>
-                    <Link
-                      className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
-                      to="/signup"
-                    >
-                      Sign Up
+                  <Link
+                    className="block w-1/2 px-3 py-2 mx-1 rounded text-center text-sm font-medium text-white leading-5 md:mx-0 md:w-auto signup"
+                    to="/signup"
+                  >
+                    Sign Up
                   </Link>
-                  </div>
-                )}
+                </div>
+              )}
+
               {userInfo && userInfo.isAdmin && (
-                <div class="relative md:mt-2">
+                <div class="relative md:mt-2 z-10">
                   <button
                     class="block md:p-2 rounded overflow-hidden focus:outline-none transition-none md:hover:bg-yellow-800 md:hover:text-white"
                     onClick={toggleAdminDropdown}
@@ -189,8 +203,9 @@ const Header = () => {
                   </button>
 
                   <div
-                    class={` ${toggleAdminDropdownButton ? "absolute" : "hidden"
-                      } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
+                    class={` ${
+                      toggleAdminDropdownButton ? "absolute" : "hidden"
+                    } sm:right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl`}
                   >
                     <Link
                       to="/admin/userslist"
@@ -217,15 +232,23 @@ const Header = () => {
                       Orders
                     </Link>
                   </div>
-                </div>)}
+                </div>
+              )}
+
               {/* Search input on mobile screen */}
-              <div className="mt-3 md:hidden">
+              <div className="mt-3 md:hidden flex">
                 <input
                   type="text"
-                  className="w-full px-4 py-3 leading-tight text-sm text-gray-700 bg-gray-100 rounded-md placeholder-gray-500 focus:outline-none focus:bg-white border-2 border-yellow-600"
+                  className="w-3/4 px-4 py-3 leading-tight text-sm text-gray-700 bg-gray-100 rounded-md placeholder-gray-500 focus:outline-none focus:bg-white border-2 border-yellow-600"
                   placeholder="Search"
                   aria-label="Search"
                 />
+                <button
+                  class="w-1/4 inline-block p-2 mx-2 rounded overflow-hidden focus:outline-none transition-none bg-yellow-800 text-white"
+                  type="submit"
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>

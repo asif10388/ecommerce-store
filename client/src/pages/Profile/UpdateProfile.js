@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Spinner from "../../components/spinner/spinner.component";
-import SideBar from "../../components/sidebar/sidebar.component"
+import SideBar from "../../components/sidebar/sidebar.component";
 
 import {
   getUserDetails,

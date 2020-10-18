@@ -3,8 +3,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 import alert from "./reducers/alert/alert.reducer";
-import { productListReducer } from "./reducers/product/product.reducer";
-import { productDetailsReducer } from "./reducers/product/product.reducer";
+import {
+  productListReducer,
+  productDetailsReducer,
+  productDeleteReducer,
+  productCreateReducer,
+  productUpdateReducer,
+  createProductReviewReducer,
+  topRatedProductsReducer,
+} from "./reducers/product/product.reducer";
 import { cartReducer } from "./reducers/cart/cart.reducer";
 import {
   userLoginReducer,
@@ -13,19 +20,26 @@ import {
   userUpdateReducer,
   userListReducer,
   userDeleteReducer,
-  userUpdateStateReducer
+  userUpdateStateReducer,
 } from "./reducers/auth/auth.reducer";
 import {
   orderCreateReducer,
   orderDetailsReducer,
   orderPayReducer,
-  orderListReducer
+  orderListReducer,
+  allOrdersReducer,
+  orderDeliverReducer,
 } from "./reducers/order/order.reducer";
 
 const rootReducer = combineReducers({
   alert,
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productDelete: productDeleteReducer,
+  productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
+  createProductReview: createProductReviewReducer,
+  topRatedProducts: topRatedProductsReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -37,8 +51,9 @@ const rootReducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
-  orderList: orderListReducer
-
+  orderDeliver: orderDeliverReducer,
+  orderList: orderListReducer,
+  allOrders: allOrdersReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -56,7 +71,7 @@ const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage
+    shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
 };

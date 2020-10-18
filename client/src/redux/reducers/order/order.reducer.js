@@ -12,7 +12,15 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAILED,
-  ORDER_LIST_RESET
+  ORDER_LIST_RESET,
+  ALL_ORDERS_LIST_REQUEST,
+  ALL_ORDERS_LIST_SUCCESS,
+  ALL_ORDERS_LIST_FAILED,
+  ALL_ORDERS_LIST_RESET,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_FAILED,
+  ORDER_DELIVER_RESET,
 } from "./order.types";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -26,7 +34,7 @@ export const orderCreateReducer = (state = {}, action) => {
       return {
         order: payload,
         loading: false,
-        success: true
+        success: true,
       };
 
     case ORDER_CREATE_FAILED:
@@ -39,7 +47,10 @@ export const orderCreateReducer = (state = {}, action) => {
   }
 };
 
-export const orderDetailsReducer = (state = { loading: true, orderItems: [], shippingAddress: {} }, action) => {
+export const orderDetailsReducer = (
+  state = { loading: true, orderItems: [], shippingAddress: {} },
+  action
+) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -89,6 +100,33 @@ export const orderPayReducer = (state = {}, action) => {
   }
 };
 
+export const orderDeliverReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case ORDER_DELIVER_REQUEST:
+      return { loading: true };
+
+    case ORDER_DELIVER_SUCCESS:
+      return {
+        success: true,
+        loading: false,
+      };
+
+    case ORDER_DELIVER_FAILED:
+      return {
+        error: payload,
+        loading: false,
+      };
+
+    case ORDER_DELIVER_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
 export const orderListReducer = (state = { orders: [] }, action) => {
   const { type, payload } = action;
 
@@ -109,6 +147,33 @@ export const orderListReducer = (state = { orders: [] }, action) => {
       };
 
     case ORDER_LIST_RESET:
+      return { orders: [] };
+
+    default:
+      return state;
+  }
+};
+
+export const allOrdersReducer = (state = { orders: [] }, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case ALL_ORDERS_LIST_REQUEST:
+      return { loading: true };
+
+    case ALL_ORDERS_LIST_SUCCESS:
+      return {
+        orders: payload,
+        loading: false,
+      };
+
+    case ALL_ORDERS_LIST_FAILED:
+      return {
+        error: payload,
+        loading: false,
+      };
+
+    case ALL_ORDERS_LIST_RESET:
       return { orders: [] };
 
     default:

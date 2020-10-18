@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
     return (
         <aside className="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xs admin-sidebar">
             <div className="p-6">
@@ -11,9 +16,12 @@ const SideBar = () => {
                 >
                     Dashboard
           </Link>
-                <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-md hover:shadow-lg hover:bg-gray-300 flex items-center justify-center">
-                    <i className="fas fa-plus mr-3"></i> Add Product
-          </button>
+                {userInfo && userInfo.isAdmin ? (
+                    <button className="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-md hover:shadow-lg hover:bg-gray-300 flex items-center justify-center">
+                        <i className="fas fa-plus mr-3"></i> Add Product
+                    </button>
+                ) : null}
+
             </div>
             <nav className="text-black text-base font-semibold pt-3">
                 <Link
